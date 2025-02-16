@@ -69,7 +69,7 @@
 
 <script>
     export default {
-        name: "StorageManage",
+        name: "TNodeSelect",
         data() {
             return {
                 tableData:[],

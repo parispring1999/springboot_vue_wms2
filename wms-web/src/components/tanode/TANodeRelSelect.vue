@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="margin-bottom: 5px;">
-      <el-input v-model="id" placeholder="请输入攻击技术编号" suffix-icon="el-icon-search" style="width: 200px;"
+      <el-input v-model="id" placeholder="请输入攻击战术编号" suffix-icon="el-icon-search" style="width: 200px;"
                 @keyup.enter.native="loadPost"></el-input>
       <el-button type="primary" style="margin-left: 5px;" @click="loadPost">查询</el-button>
       <el-button type="success" @click="resetParam">重置</el-button>
@@ -12,11 +12,11 @@
               :header-cell-style="{ background: '#f2f5fc', color: '#555555' }"
               border
     >
-      <el-table-column prop="eacNode.id" label="防御反制活动编号" width="120">
+      <el-table-column prop="tnode.id" label="攻击技术编号" width="120">
       </el-table-column>
-      <el-table-column prop="eacNode.name" label="防御反制活动名" width="240">
+      <el-table-column prop="tnode.name" label="攻击技术名" width="240">
       </el-table-column>
-      <el-table-column prop="eacNode.des" label="描述">
+      <el-table-column prop="tnode.des" label="描述">
       </el-table-column>
       <!--            <el-table-column prop="operate" label="操作">
                       <template slot-scope="scope">
@@ -69,7 +69,7 @@
 
 <script>
 export default {
-  name: "TNodeRelSelect",
+  name: "TANodeRelSelect",
   data() {
     return {
       tableData:[],
@@ -206,13 +206,13 @@ export default {
     },
     loadPost(id){
       id=this.id
-      this.$axios.get(this.$httpUrl+'/t_node/get_t_node?id='+id).then(res=>res.data).then(res=>{
+      this.$axios.get(this.$httpUrl+'/t_a_node/get_t_a_node?id='+id).then(res=>res.data).then(res=>{
         console.log(res)
         if (res) {
           // 将 dyRelationship 数组赋值给 tableData
-          this.tableData = res.dyRelationship;
+          this.tableData = res.juRelationship;
           // 更新总记录数
-          this.total = res.dyRelationship.length;
+          this.total = res.juRelationship.length;
         }
         /*if(res.code==200){
             this.tableData=res.data
