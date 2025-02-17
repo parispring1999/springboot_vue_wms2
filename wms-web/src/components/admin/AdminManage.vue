@@ -20,11 +20,11 @@
                   :header-cell-style="{ background: '#f2f5fc', color: '#555555' }"
                   border
         >
-            <el-table-column prop="id" label="ID" width="60">
+            <el-table-column prop="id" label="ID" width="80">
             </el-table-column>
-            <el-table-column prop="no" label="账号" width="180">
+            <el-table-column prop="no" label="账号" width="240">
             </el-table-column>
-            <el-table-column prop="name" label="姓名" width="180">
+            <el-table-column prop="name" label="姓名" width="240">
             </el-table-column>
             <el-table-column prop="age" label="年龄" width="80">
             </el-table-column>
@@ -43,7 +43,7 @@
                         (scope.row.roleId === 1 ? '管理员' : '用户')}}</el-tag>
                 </template>
             </el-table-column>
-            <el-table-column prop="phone" label="电话" width="180">
+            <el-table-column prop="phone" label="电话" width="240">
             </el-table-column>
             <el-table-column prop="operate" label="操作">
                 <template slot-scope="scope">

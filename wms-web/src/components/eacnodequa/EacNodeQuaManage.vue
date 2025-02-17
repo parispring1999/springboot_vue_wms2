@@ -65,7 +65,7 @@
                 width="30%"
                 center>
 
-            <el-form ref="form"  :model="form" label-width="80px">
+            <el-form ref="form"  :model="form" label-width="100px">
                 <el-form-item label="编号" prop="eac">
                     <el-col :span="20">
                         <el-input v-model="form.eac"></el-input>
