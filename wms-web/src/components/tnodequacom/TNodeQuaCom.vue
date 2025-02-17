@@ -96,7 +96,7 @@
 
 <script>
 export default {
-  name: "NodeQuaCom",
+  name: "TNodeQuaCom",
   data() {
     return {
       tableData: [],
