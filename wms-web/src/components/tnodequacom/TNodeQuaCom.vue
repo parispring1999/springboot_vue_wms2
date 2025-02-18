@@ -89,6 +89,8 @@
       <span slot="footer" class="dialog-footer">
     <el-button @click="centerDialogVisible = false">取 消</el-button>
     <el-button type="primary" @click="sure">确 定</el-button>
+        <el-button @click="resetForm">重 置</el-button>
+        <el-button type="primary" @click="loadPost">查 表</el-button>
   </span>
     </el-dialog>
   </div>
@@ -183,7 +185,32 @@ export default {
           return false;
         }
       });
-
+    },
+    loadPost(){
+      this.$axios.post(this.$httpUrl+'/tNodeQua/listPage',{
+        pageSize:1,
+        pageNum:1,
+        param:{
+          t:this.form.t
+        }
+      }).then(res=>res.data).then(res=>{
+        console.log(res)
+        const firstItem = res.data[0];
+        // 将数据赋值给表单对象
+        this.form = {
+          t: this.form.t,
+          v: this.form.v,
+          rs: firstItem.rs || "",
+          sa: firstItem.sa || "",
+          lia: firstItem.lia || "",
+          pc: firstItem.pc || "",
+          pi: firstItem.pi || "",
+          pa: firstItem.pa || "",
+          av: firstItem.av || "",
+          pr: firstItem.pr || "",
+          ui: firstItem.ui || ""
+        };
+      })
     },
     resetParam(){
       this.tableData=[]
