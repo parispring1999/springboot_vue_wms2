@@ -1,6 +1,10 @@
 import pygambit as gbt
+import os
 
-g = gbt.Game.read_game("game1.gbt")
+script_dir = os.path.dirname(os.path.abspath(__file__))
+game_file_path = os.path.join(script_dir, "gambit", "game1.gbt")
+
+g = gbt.Game.read_game(game_file_path)
 print(g.write(format='native'))
 result = gbt.nash.enumpure_solve(game=g, use_strategic=False)
 result2 = gbt.nash.lcp_solve(game=g, use_strategic=False)
