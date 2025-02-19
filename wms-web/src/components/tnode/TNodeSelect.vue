@@ -224,9 +224,7 @@
                 })
             }
         },
-        beforeMount() {
-            this.loadPost()
-        }
+
     }
 </script>
 

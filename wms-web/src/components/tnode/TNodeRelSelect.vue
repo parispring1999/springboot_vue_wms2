@@ -224,9 +224,7 @@ export default {
       })
     }
   },
-  beforeMount() {
-    this.loadPost()
-  }
+
 }
 </script>
 
