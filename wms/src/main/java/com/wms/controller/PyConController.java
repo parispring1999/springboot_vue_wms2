@@ -1,6 +1,7 @@
 package com.wms.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +14,7 @@ import java.nio.file.Paths;
 @RequestMapping("/pyCon")
 public class PyConController {
     //public static void main(String [] args) {
-    @GetMapping("/runGame1")
+    @PostMapping("/runGame1")
     public String runGame1() {
         //Scanner scanner = new Scanner(System.in);
         //int a = scanner.nextInt();

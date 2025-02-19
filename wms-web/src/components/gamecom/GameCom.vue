@@ -55,7 +55,7 @@ export default {
       this.centerDialogVisible = true
     },
     doCompute(){
-        this.$axios.get(this.$httpUrl+'/pyCon/runGame1').then(res=>res.data).then(res=>{
+        this.$axios.post(this.$httpUrl+'/pyCon/runGame1').then(res=>res.data).then(res=>{
           if (res) {
             this.tableData = [{ out: res }];
           }})
