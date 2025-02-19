@@ -16,7 +16,7 @@
 <numbers decimals="4"/>
 <game>
 <efgfile>
-EFG 2 R "game1" { "red" "blue" }
+EFG 2 R "game_1" { "red" "blue" }
 ""
 
 c "" 1 "" { "1" 1/2 "2" 1/2 } 0

@@ -24,7 +24,7 @@ public class PyConController {
         try {
             //String[] my_args =new String[] {"python","test.py",String.valueOf(a),String.valueOf(b),String.valueOf(c)};
             String projectRoot = System.getProperty("user.dir");
-            String scriptPath = Paths.get(projectRoot, "springboot_vue_wms", "wms-py", "Game1.py").toString();
+            String scriptPath = Paths.get(projectRoot, "springboot_vue_wms", "wms-py", "game_1.py").toString();
 
             String[] my_args =new String[] {"python",scriptPath};
             Process proc =  Runtime.getRuntime().exec(my_args);//执行脚本

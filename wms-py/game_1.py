@@ -2,7 +2,7 @@ import pygambit as gbt
 import os
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-game_file_path = os.path.join(script_dir, "gambit", "game1.gbt")
+game_file_path = os.path.join(script_dir, "gambit", "game_1.gbt")
 
 g = gbt.Game.read_game(game_file_path)
 print(g.write(format='native'))
@@ -12,11 +12,3 @@ qre=gbt.nash.logit_principal_branch(game=g)
 print(result2.equilibria)
 print(g.nodes()[3].outcome["red"],g.nodes()[3].outcome["blue"])
 print(g.root.children[0].children[0])
-
-g2 = gbt.Game.new_tree(players=["red", "blue"],title="game2")
-g2.append_move(g2.root, g2.players.chance, ["1","2"])
-g2.set_chance_probs(g2.root.infoset,[gbt.Rational(1, 2), gbt.Rational(1, 2)])
-# g2.set_chance_probs(g2.root.infoset,[gbt.Decimal(".25"), gbt.Decimal(".75")])
-for node in g2.root.children:
-    g2.append_move(node, "blue", ["11", "12"])
-# print(g2.write(format='native'))
