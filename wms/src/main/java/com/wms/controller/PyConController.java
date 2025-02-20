@@ -1,7 +1,9 @@
 package com.wms.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import com.wms.common.QueryPageParam;
+import com.wms.common.QueryParam;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,23 +12,36 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Paths;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Pattern;
+
 @RestController
 @RequestMapping("/pyCon")
 public class PyConController {
-    //public static void main(String [] args) {
-    @PostMapping("/runGame1")
-    public String runGame1() {
-        //Scanner scanner = new Scanner(System.in);
-        //int a = scanner.nextInt();
-        //int b = scanner.nextInt();
-        //int c = scanner.nextInt();
+    @PostMapping("/runGame2")
+    public String runGame1(@RequestBody QueryParam query) {
+        String projectRoot = System.getProperty("user.dir");
+        String scriptPath = Paths.get(projectRoot, "springboot_vue_wms", "wms-py", "game_2.py").toString();
+
+        HashMap par = query.getParam();
+        String inputData = (String)par.get("inputData");;
+        String[] inputArray = Pattern.compile("[,\\s]+").split(inputData.trim());
+        List<String> dynamicParams = new ArrayList<>();
+        for (String param : inputArray) {
+            if (!param.isEmpty()) {
+                dynamicParams.add(param);
+            }
+        }
+        List<String> commandList = new ArrayList<>();
+        commandList.add("python");
+        commandList.add(scriptPath);
+        commandList.addAll(dynamicParams);
+        String[] my_args = commandList.toArray(new String[0]);
+        //String[] my_args =new String[] {"python","test.py",String.valueOf(a),String.valueOf(b),String.valueOf(c)};
         StringBuilder output = new StringBuilder();
         try {
-            //String[] my_args =new String[] {"python","test.py",String.valueOf(a),String.valueOf(b),String.valueOf(c)};
-            String projectRoot = System.getProperty("user.dir");
-            String scriptPath = Paths.get(projectRoot, "springboot_vue_wms", "wms-py", "game_1.py").toString();
-
-            String[] my_args =new String[] {"python",scriptPath};
             Process proc =  Runtime.getRuntime().exec(my_args);//执行脚本
             BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             String line = null;

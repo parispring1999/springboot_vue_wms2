@@ -19,10 +19,10 @@
         :visible.sync="centerDialogVisible"
         width="30%"
         center>
-      <el-form ref="form"  :model="form" label-width="120px">
-        <el-form-item label="输入值" prop="in">
+      <el-form ref="form"  :model="form" label-width="90px">
+        <el-form-item label="输入值" prop="inputData">
           <el-col :span="20">
-            <el-input v-model="form.in"></el-input>
+            <el-input v-model="form.inputData" type="textarea"></el-input>
           </el-col>
         </el-form-item>
       </el-form>
@@ -43,7 +43,7 @@ export default {
       tableData: [],
       centerDialogVisible:false,
       form:{
-        in:"",
+        inputData:"",
       },
     }
   },
@@ -55,7 +55,9 @@ export default {
       this.centerDialogVisible = true
     },
     doCompute(){
-        this.$axios.post(this.$httpUrl+'/pyCon/runGame1').then(res=>res.data).then(res=>{
+        this.$axios.post(this.$httpUrl+'/pyCon/runGame2',{
+            param:{inputData:this.form.inputData}
+        }).then(res=>res.data).then(res=>{
           if (res) {
             this.tableData = [{ out: res }];
           }})
