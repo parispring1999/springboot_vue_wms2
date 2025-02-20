@@ -1,42 +1,46 @@
 import pygambit as gbt
+import sys
 
-'''
-EFG 2 R "game_2" { "red" "blue" }
-""
-
-c "" 1 "" { "1" 1/2 "2" 1/2 } 0
-p "" 2 1 "" { "11" "12" } 0
-p "" 1 1 "" { "1" "2" "3" } 0
-t "" 1 "" { -12.37, -17.77 }
-t "" 2 "" { -56.95, 12.14 }
-t "" 9 "" { -11.39, -19.70 }
-p "" 1 2 "" { "1" "2" "3" } 0
-t "" 3 "" { -12.37, -24.77 }
-t "" 4 "" { -56.95, 5.14 }
-t "" 11 "" { -11.35, -26.70 }
-p "" 2 2 "" { "11" "12" } 0
-p "" 1 1 "" { "1" "2" "3" } 0
-t "" 5 "" { -59.80, 5.51 }
-t "" 6 "" { -29.09, -23.58 }
-t "" 10 "" { -59.38, 5.73 }
-p "" 1 2 "" { "1" "2" "3" } 0
-t "" 7 "" { -59.80, 12.51 }
-t "" 8 "" { -29.09, -12.58 }
-t "" 12 "" { -59.38, 12.73 }
-'''
-
+# blue_opt, red_opt = 2, 3
+blue_opt = int(sys.argv[1])
+red_opt = int(sys.argv[2])
 
 g = gbt.Game.new_tree(players=["red", "blue"], title="game_2")
-g.append_move(g.root, g.players.chance, ["1", "2"])
-g.set_chance_probs(g.root.infoset, [gbt.Rational(1, 2), gbt.Rational(1, 2)])
+moves_1 = [str(i) for i in range(1, blue_opt + 1)]
+g.append_move(g.root, g.players.chance, moves_1)
+
+probs = []
+index_1 = 3
+for i in range(blue_opt):
+    num = int(sys.argv[index_1])
+    den = int(sys.argv[index_1 + 1])
+    prob = gbt.Rational(num, den)
+    probs.append(prob)
+    index_1 += 2
+g.set_chance_probs(g.root.infoset, probs)
 # g.set_chance_probs(g.root.infoset,[gbt.Decimal(".25"), gbt.Decimal(".75")])
+
+moves_2 = [f"1{i}" for i in range(1, blue_opt + 1)]
 for node in g.root.children:
-    g.append_move(node, "blue", ["11", "12"])
+    g.append_move(node, "blue", moves_2)
+
+moves_3 = [str(i) for i in range(1, red_opt + 1)]
 for node in g.root.children[0].children:
-    g.append_move(node, "red", ["1", "2", "3"])
-for i in range(len(g.root.children)):
-    g.append_infoset(g.root.children[1].children[i], g.root.children[0].children[i].infoset)
-g.set_outcome(g.root.children[0].children[0].children[0], g.add_outcome([-12.37, -17.77]))
-g.set_outcome(g.root.children[0].children[0].children[1], g.add_outcome([-56.95, 12.14]))
-g.set_outcome(g.root.children[0].children[0].children[2], g.add_outcome([-11.39, -19.70]))
+    g.append_move(node, "red", moves_3)
+
+for j in range(1, blue_opt):
+    for i in range(blue_opt):
+        g.append_infoset(g.root.children[j].children[i], g.root.children[0].children[i].infoset)
+# g.set_outcome(g.root.children[0].children[0].children[0], g.add_outcome([-12.37, -17.77]))
+
+index_2 = 3 + 2 * blue_opt
+for i in range(blue_opt):
+    for j in range(blue_opt):
+        for k in range(red_opt):
+            g.set_outcome(g.root.children[i].children[j].children[k],
+                          g.add_outcome([float(sys.argv[index_2]),
+                                         float(sys.argv[index_2 + 1])]))
+            index_2 += 2
+
 print(g.write(format='native'))
+
