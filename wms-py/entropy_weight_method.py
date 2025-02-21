@@ -3,18 +3,20 @@ import numpy as np
 import math
 from numpy import array
 import copy
+import sys
+import re
 
 # 熵值法函数 求指标权重
-def cal_entropy_weight(x, label = dict()):
+def cal_entropy_weight(x, label=dict()):
     '''熵值法计算变量的权重'''
-    print('原始数据：'+ str(x))
+    # print('原始数据：' + str(x))
     # 获得表的列头
     x_header = x.keys()
     # 初始化默认的label：1为正向指标 2 为负向指标
     if len(label) == 0:
         for key in x_header:
             label[key] = 1
-    print('label:'+str(label))
+    # print('label:' + str(label))
     # 标准化
     for key in label:
         # 得到列最大和最小
@@ -22,10 +24,10 @@ def cal_entropy_weight(x, label = dict()):
         minium = np.min(x[key], axis=0)
         # print('maxium:' + str(maxium))
         # print('minium:' + str(minium))
-        if label[key] == 1:# 正向指标
+        if label[key] == 1:  # 正向指标
             x[key] = x.loc[:, key].apply(lambda x: ((x - minium) / (maxium - minium)))
             # x[key].apply(lambda x: ((x - maxium) / (np.max(x) - np.min(x))))
-        elif label[key] == 2: # 负向指标
+        elif label[key] == 2:  # 负向指标
             x[key] = x.loc[:, key].apply(lambda x: ((maxium - x) / (maxium - minium)))
         else:
             print('输入的数据标签有误！')
@@ -39,7 +41,7 @@ def cal_entropy_weight(x, label = dict()):
     # x = x.apply(lambda x: ((np.max(x) - x) / (np.max(x) - np.min(x))))
     # 获得标准化的表中的值
     x_standardized_data = list(x.to_dict().values())
-    print('标准化：' + str(x))
+    # print('标准化：' + str(x))
 
     # 求k
     rows = x.index.size  # 行
@@ -58,8 +60,8 @@ def cal_entropy_weight(x, label = dict()):
     for i in range(0, rows):
         for j in range(0, cols):
             if x[i][j] == 0:
-                lnfij = 0.0
-                p_row_list.append(0.0000)
+                lnfij = 0.0000
+                p_row_list.append(0.00000)
             else:
                 p = x[i][j] / x.sum(axis=0)[j]
                 # print(type(p))
@@ -77,7 +79,7 @@ def cal_entropy_weight(x, label = dict()):
         p_num += 1
     p_df = pd.DataFrame(p_dict)
     # print(p_list)
-    print('参数的熵' + str(p_df))
+    # print('参数的熵' + str(p_df))
     lnf = pd.DataFrame(lnf)
     E = lnf
     # 计算冗余度
@@ -88,35 +90,53 @@ def cal_entropy_weight(x, label = dict()):
         wj = d[j] / sum(d)
         w[j] = wj
     # 计算各样本的综合得分,用标准化后的数据
-    record_row = 0.0
+    record_row = 0.0000
     record = list()
-    record_sum = 0.00
-    x_standardized_data =  [[r[col] for r in x_standardized_data] for col in range(len(x_standardized_data[0]))]
+    record_sum = 0.00000
+    x_standardized_data = [[r[col] for r in x_standardized_data] for col in range(len(x_standardized_data[0]))]
     # print('转置后的标准化:'+str(x_original_data))
     for i in range(len(x_standardized_data)):
         for j in range(len(x_standardized_data[i])):
             # print('x_original_data[i][j]' + str(x_original_data[i][j]))
             # print('w:' + str(w[i]))
-            record_sum += x_standardized_data[i][j]*w[j]
-            record_row += x_standardized_data[i][j]*w[j]
+            record_sum += x_standardized_data[i][j] * w[j]
+            record_row += x_standardized_data[i][j] * w[j]
         # print('record_row:' + str(round(record_row, 2)))
         record.append(round(record_row * 100, 2))
         record_row = 0.0
-    print('record:' + str(record))
-    record_average = round(record_sum/len(record)*100, 2)
-    print('record_average:' + str(record_average))
+    # print('record:' + str(record))
+    record_average = round(record_sum / len(record) * 100, 2)
+    # print('record_average:' + str(record_average))
     w = pd.DataFrame(w)
     return w
 
-a = {'1': 0.5537, '2': 0.5221, '3': 0.5133, '4': 0.5688, '5': 0.5498, '6': 0.5104}
-b = {'1': 0.3047, '2': 0.4371, '3': 0.3436, '4': 0.5225, '5': 1.0353, '6': 0.9051}
-c = {'1': 0.0000, '2': 0.1851, '3': -0.0288, '4': 0.3011, '5': -0.1522, '6': 0.1549}
-d = {'1': 0.3207, '2': 0.3282, '3': 0.3321, '4': 0.3365, '5': 0.3302, '6': 0.3424}
-deal_b= dict()
+# 检查是否传入了四个参数
+if len(sys.argv) != 5:
+    sys.exit(1)
+
+# 初始化四个空字典
+a = {}
+b = {}
+c = {}
+d = {}
+
+# 存储字典的列表
+dicts = [a, b, c, d]
+
+# 遍历传入的四个参数
+for i, arg in enumerate(sys.argv[1:], start=1):
+    # 去除参数中的空格并分割成数字列表
+    numbers = [float(num) for num in re.findall(r'[-+]?\d*\.\d+|[-+]?\d+', arg)]
+    # 将数字列表转换为字典
+    current_dict = dicts[i - 1]
+    for j, num in enumerate(numbers, start=1):
+        current_dict[str(j)] = num
+
+deal_b = dict()
 for key, value in b.items():
     deal_b[key] = abs(b[key] - 1)
-data = {'a':list(a.values()), 'b':list(b.values()), 'c':list(c.values()), 'd':list(d.values())}
-label = {'a':1, 'b':2, 'c':1, 'd':1}
+data = {'a': list(a.values()), 'b': list(b.values()), 'c': list(c.values()), 'd': list(d.values())}
+label = {'a': 1, 'b': 1, 'c': 1, 'd': 1}
 
 # # 求熵权法
 df = pd.DataFrame(data)
@@ -124,4 +144,19 @@ df.dropna()
 w = cal_entropy_weight(df, label)  # 调用cal_weight
 w.index = df.columns
 w.columns = ['weight']
-print(w)
+# print(w)
+
+# 将abcd四个字典的值，乘各自的权重然后累加，得到一个字典
+weighted_sum_dict = {}
+# 假设字典a、b、c、d的键是相同的
+keys = a.keys()
+weights = w['weight'].tolist()
+for key in keys:
+    weighted_sum = a[key] * weights[0] + b[key] * weights[1] + c[key] * weights[2] + d[key] * weights[3]
+    weighted_sum_dict[key] = weighted_sum
+
+# print("加权累加后的字典:", weighted_sum_dict)
+
+# 将加权累加后字典中的每个值乘60
+final_dict = {key: value * 60 for key, value in weighted_sum_dict.items()}
+print("每个值乘60后的字典:", final_dict)
