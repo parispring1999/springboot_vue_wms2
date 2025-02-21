@@ -107,3 +107,21 @@ def cal_entropy_weight(x, label = dict()):
     print('record_average:' + str(record_average))
     w = pd.DataFrame(w)
     return w
+
+a = {'1': 0.5537, '2': 0.5221, '3': 0.5133, '4': 0.5688, '5': 0.5498, '6': 0.5104}
+b = {'1': 0.3047, '2': 0.4371, '3': 0.3436, '4': 0.5225, '5': 1.0353, '6': 0.9051}
+c = {'1': 0.0000, '2': 0.1851, '3': -0.0288, '4': 0.3011, '5': -0.1522, '6': 0.1549}
+d = {'1': 0.3207, '2': 0.3282, '3': 0.3321, '4': 0.3365, '5': 0.3302, '6': 0.3424}
+deal_b= dict()
+for key, value in b.items():
+    deal_b[key] = abs(b[key] - 1)
+data = {'a':list(a.values()), 'b':list(b.values()), 'c':list(c.values()), 'd':list(d.values())}
+label = {'a':1, 'b':2, 'c':1, 'd':1}
+
+# # 求熵权法
+df = pd.DataFrame(data)
+df.dropna()
+w = cal_entropy_weight(df, label)  # 调用cal_weight
+w.index = df.columns
+w.columns = ['weight']
+print(w)
