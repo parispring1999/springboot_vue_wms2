@@ -174,7 +174,7 @@
             del(eac){
                 console.log(eac)
 
-                this.$axios.get(this.$httpUrl+'/eacNodeQua/del?t='+eac).then(res=>res.data).then(res=>{
+                this.$axios.get(this.$httpUrl+'/eacNodeQua/del?eac='+eac).then(res=>res.data).then(res=>{
                     console.log(res)
                     if(res.code==200){
 
@@ -264,11 +264,19 @@
             save(){
                 this.$refs.form.validate((valid) => {
                     if (valid) {
-                        if(this.form.eac){
-                            this.doMod();
-                        }else{
-                            this.doSave();
+                      this.$axios.post(this.$httpUrl+'/eacNodeQua/listPage',{
+                        pageSize:this.pageSize,
+                        pageNum:this.pageNum,
+                        param:{
+                          eac:this.form.eac
                         }
+                      }).then(res=>res.data).then(res=> {
+                        if (res.data[0].eac===this.form.eac) {
+                          this.doMod();
+                        } else {
+                          this.doSave();
+                        }
+                      })
                     } else {
                         console.log('error submit!!');
                         return false;

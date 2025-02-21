@@ -149,11 +149,11 @@
                   pr:"",
                   ui:""
                 },
-                /*rules: {
-                    name: [
-                        {required: true, message: '请输入仓库名', trigger: 'blur'}
+                rules: {
+                    t: [
+                        {required: true}
                     ]
-                }*/
+                }
             }
         },
         methods:{
@@ -229,7 +229,7 @@
                 })
             },
             doMod(){
-                this.$axios.post(this.$httpUrl+'/tNodeQua/update',this.form).then(res=>res.data).then(res=>{
+              this.$axios.post(this.$httpUrl+'/tNodeQua/update',this.form).then(res=>res.data).then(res=>{
                     console.log(res)
                     if(res.code==200){
 
@@ -252,11 +252,19 @@
             save(){
                 this.$refs.form.validate((valid) => {
                     if (valid) {
-                        if(this.form.t){
-                            this.doMod();
-                        }else{
-                            this.doSave();
+                      this.$axios.post(this.$httpUrl+'/tNodeQua/listPage',{
+                        pageSize:this.pageSize,
+                        pageNum:this.pageNum,
+                        param:{
+                          t:this.form.t
                         }
+                      }).then(res=>res.data).then(res=> {
+                        if (res.data[0].t===this.form.t) {
+                          this.doMod();
+                        } else {
+                          this.doSave();
+                        }
+                      })
                     } else {
                         console.log('error submit!!');
                         return false;
