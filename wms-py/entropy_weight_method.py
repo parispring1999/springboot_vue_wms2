@@ -159,4 +159,4 @@ for key in keys:
 
 # 将加权累加后字典中的每个值乘60
 final_dict = {key: value * 60 for key, value in weighted_sum_dict.items()}
-print("每个值乘60后的字典:", final_dict)
+print(final_dict)
