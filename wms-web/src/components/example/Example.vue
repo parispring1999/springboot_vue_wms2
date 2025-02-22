@@ -7,35 +7,35 @@
     <el-table :data="tableData"
               :header-cell-style="{ background: '#f2f5fc', color: '#555555' }"
               border>
-      <el-table-column prop="t1m1A1r" label="t1,m1,A1,r" width="90">
+      <el-table-column prop="t1m1A1r" label="t1,m1,A1,a" width="90">
       </el-table-column>
       <el-table-column prop="t1m1A1d" label="t1,m1,A1,d" width="90">
       </el-table-column>
-      <el-table-column prop="t1m1A2r" label="t1,m1,A2,r" width="90">
+      <el-table-column prop="t1m1A2r" label="t1,m1,A2,a" width="90">
       </el-table-column>
       <el-table-column prop="t1m1A2d" label="t1,m1,A2,d" width="90">
       </el-table-column>
-      <el-table-column prop="t1m2A1r" label="t1,m2,A1,r" width="90">
+      <el-table-column prop="t1m2A1r" label="t1,m2,A1,a" width="90">
       </el-table-column>
       <el-table-column prop="t1m2A1d" label="t1,m2,A1,d" width="90">
       </el-table-column>
-      <el-table-column prop="t1m2A2r" label="t1,m2,A2,r" width="90">
+      <el-table-column prop="t1m2A2r" label="t1,m2,A2,a" width="90">
       </el-table-column>
       <el-table-column prop="t1m2A2d" label="t1,m2,A2,d" width="90">
       </el-table-column>
-      <el-table-column prop="t2m1A1r" label="t2,m1,A1,r" width="90">
+      <el-table-column prop="t2m1A1r" label="t2,m1,A1,a" width="90">
       </el-table-column>
       <el-table-column prop="t2m1A1d" label="t2,m1,A1,d" width="90">
       </el-table-column>
-      <el-table-column prop="t2m1A2r" label="t2,m1,A2,r" width="90">
+      <el-table-column prop="t2m1A2r" label="t2,m1,A2,a" width="90">
       </el-table-column>
       <el-table-column prop="t2m1A2d" label="t2,m1,A2,d" width="90">
       </el-table-column>
-      <el-table-column prop="t2m2A1r" label="t2,m2,A1,r" width="90">
+      <el-table-column prop="t2m2A1r" label="t2,m2,A1,a" width="90">
       </el-table-column>
       <el-table-column prop="t2m2A1d" label="t2,m2,A1,d" width="90">
       </el-table-column>
-      <el-table-column prop="t2m2A2r" label="t2,m2,A2,r" width="90">
+      <el-table-column prop="t2m2A2r" label="t2,m2,A2,a" width="90">
       </el-table-column>
       <el-table-column prop="t2m2A2d" label="t2,m2,A2,d" width="90">
       </el-table-column>
