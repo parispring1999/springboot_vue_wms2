@@ -1,5 +1,6 @@
 import pygambit as gbt
 import sys
+import os
 
 # blue_opt, red_opt = 2, 3
 blue_opt = int(sys.argv[1])
@@ -42,7 +43,11 @@ for i in range(blue_opt):
                                          float(sys.argv[index_2 + 1])]))
             index_2 += 2
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+game_file_path = os.path.join(script_dir, "gambit", "game_2.efg")
+g.to_efg(game_file_path)
 # print(g.write(format='native'))
+
 # qre=gbt.nash.logit_principal_branch(game=g)
 result = gbt.nash.lcp_solve(game=g, use_strategic=False)
 print(result.equilibria)

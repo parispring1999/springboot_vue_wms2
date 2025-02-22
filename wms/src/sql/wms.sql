@@ -11,7 +11,7 @@
  Target Server Version : 80031
  File Encoding         : 65001
 
- Date: 19/02/2025 16:26:25
+ Date: 22/02/2025 15:34:18
 */
 
 SET NAMES utf8mb4;
@@ -137,9 +137,11 @@ INSERT INTO `menu` VALUES (5, '005', '查询防御反制活动', '1', NULL, 'Eac
 INSERT INTO `menu` VALUES (6, '006', '查询战术包含的技术', '1', NULL, 'TANode', '0,1,2', 'tanode/TANodeRelSelect', 'el-icon-search');
 INSERT INTO `menu` VALUES (7, '007', '攻击技术量化值', '1', NULL, 'TNodeQua', '0,1,2', 'tnodequa/TNodeQuaManage', 'el-icon-s-data');
 INSERT INTO `menu` VALUES (8, '008', '防御反制活动量化值', '1', NULL, 'EacNodeQua', '0,1,2', 'eacnodequa/EacNodeQuaManage', 'el-icon-s-data');
-INSERT INTO `menu` VALUES (9, '009', '计算公式取值(攻击）', '1', NULL, 'TNodeQuaCom', '0,1,2', 'tnodequacom/TNodeQuaCom', 'el-icon-cpu');
-INSERT INTO `menu` VALUES (10, '0010', '计算公式取值(防御）', '1', NULL, 'EacNodeQuaCom', '0,1,2', 'eacnodequacom/EacNodeQuaCom', 'el-icon-cpu');
-INSERT INTO `menu` VALUES (11, '0011', '计算博弈均衡', '1', NULL, 'GameCom', '0,1,2', 'gamecom/GameCom', 'el-icon-cpu');
+INSERT INTO `menu` VALUES (9, '009', '计算主机价值', '1', NULL, 'HostValue', '0,1,2', 'hostvalue/HostValue', 'el-icon-cpu');
+INSERT INTO `menu` VALUES (10, '0010', '计算公式取值(攻击）', '1', NULL, 'TNodeQuaCom', '0,1,2', 'tnodequacom/TNodeQuaCom', 'el-icon-cpu');
+INSERT INTO `menu` VALUES (11, '0011', '计算公式取值(防御）', '1', NULL, 'EacNodeQuaCom', '0,1,2', 'eacnodequacom/EacNodeQuaCom', 'el-icon-cpu');
+INSERT INTO `menu` VALUES (12, '0012', '计算博弈均衡', '1', NULL, 'GameCom', '0,1,2', 'gamecom/GameCom', 'el-icon-cpu');
+INSERT INTO `menu` VALUES (13, '0013', '案例计算与防御者决策', '1', NULL, 'Example', '0,1,2', 'example/Example', 'el-icon-guide');
 
 -- ----------------------------
 -- Table structure for t_node_qua
