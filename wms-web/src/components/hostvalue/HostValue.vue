@@ -20,10 +20,25 @@
         width="30%"
         center>
       <el-form ref="form"  :model="form" label-width="90px">
-        <el-form-item label="输入值" prop="inputData">
+        <el-form-item label="主机类型" prop="hostType">
           <el-col :span="20">
-            <el-input v-model="form.inputData" type="textarea"></el-input>
+            <el-input v-model="form.hostType" type="textarea"></el-input>
           </el-col>
+        </el-form-item>
+        <el-form-item label="系统类型" prop="systemType">
+          <el-col :span="20">
+            <el-input v-model="form.systemType" type="textarea"></el-input>
+          </el-col>
+        </el-form-item>
+        <el-form-item label="直接连接数" prop="connectionNum">
+          <el-col :span="20">
+            <el-input v-model="form.connectionNum" type="textarea"></el-input>
+          </el-col>
+        </el-form-item>
+        <el-form-item label="业务类别" prop="businessType">
+        <el-col :span="20">
+          <el-input v-model="form.businessType" type="textarea"></el-input>
+        </el-col>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -43,6 +58,10 @@ export default {
       tableData: [],
       centerDialogVisible:false,
       form:{
+        hostType:"",
+        systemType:"",
+        connectionNum:"",
+        businessType:"",
         inputData:"",
       },
     }
@@ -55,6 +74,10 @@ export default {
       this.centerDialogVisible = true
     },
     doCompute(){
+      this.form.inputData += this.form.hostType + ";";
+      this.form.inputData += this.form.systemType + ";";
+      this.form.inputData += this.form.connectionNum + ";";
+      this.form.inputData += this.form.businessType;
         this.$axios.post(this.$httpUrl+'/pyCon/hostValue',{
             param:{inputData:this.form.inputData}
         }).then(res=>res.data).then(res=>{

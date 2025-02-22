@@ -19,10 +19,25 @@
         :visible.sync="centerDialogVisible"
         width="30%"
         center>
-      <el-form ref="form"  :model="form" label-width="90px">
-        <el-form-item label="输入值" prop="inputData">
+      <el-form ref="form"  :model="form" label-width="100px">
+        <el-form-item label="防御者选择数" prop="blueNum">
           <el-col :span="20">
-            <el-input v-model="form.inputData" type="textarea"></el-input>
+            <el-input v-model="form.blueNum" ></el-input>
+          </el-col>
+        </el-form-item>
+        <el-form-item label="攻击者选择数" prop="redNum">
+          <el-col :span="20">
+            <el-input v-model="form.redNum" ></el-input>
+          </el-col>
+        </el-form-item>
+        <el-form-item label="概率分布" prop="chance">
+          <el-col :span="20">
+            <el-input v-model="form.chance" type="textarea"></el-input>
+          </el-col>
+        </el-form-item>
+        <el-form-item label="回报函数值" prop="outcome">
+          <el-col :span="20">
+            <el-input v-model="form.outcome" type="textarea"></el-input>
           </el-col>
         </el-form-item>
       </el-form>
@@ -43,6 +58,10 @@ export default {
       tableData: [],
       centerDialogVisible:false,
       form:{
+        blueNum:"",
+        redNum:"",
+        chance:"",
+        outcome:"",
         inputData:"",
       },
     }
@@ -55,6 +74,10 @@ export default {
       this.centerDialogVisible = true
     },
     doCompute(){
+      this.form.inputData += this.form.blueNum + ",";
+      this.form.inputData += this.form.redNum + ",";
+      this.form.inputData += this.form.chance + ",";
+      this.form.inputData += this.form.outcome;
         this.$axios.post(this.$httpUrl+'/pyCon/runGame2',{
             param:{inputData:this.form.inputData}
         }).then(res=>res.data).then(res=>{
