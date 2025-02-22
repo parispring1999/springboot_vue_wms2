@@ -52,7 +52,7 @@
 
 <script>
 export default {
-  name: "GameCom",
+  name: "HostValue",
   data() {
     return {
       tableData: [],

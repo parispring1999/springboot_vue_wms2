@@ -11,7 +11,7 @@
  Target Server Version : 80031
  File Encoding         : 65001
 
- Date: 22/02/2025 15:34:18
+ Date: 22/02/2025 23:04:38
 */
 
 SET NAMES utf8mb4;
@@ -129,8 +129,8 @@ CREATE TABLE `menu`  (
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES (1, '001', '管理员管理', '1', NULL, 'Admin', '0', 'admin/AdminManage.vue', 'el-icon-s-custom');
-INSERT INTO `menu` VALUES (2, '002', '用户管理', '1', NULL, 'User', '0,1', 'user/UserManage.vue', 'el-icon-user-solid');
+INSERT INTO `menu` VALUES (1, '001', '管理员用户管理', '1', NULL, 'Admin', '0', 'admin/AdminManage.vue', 'el-icon-s-custom');
+INSERT INTO `menu` VALUES (2, '002', '普通用户管理', '1', NULL, 'User', '0,1', 'user/UserManage.vue', 'el-icon-user-solid');
 INSERT INTO `menu` VALUES (3, '003', '查询攻击技术', '1', NULL, 'TNode', '0,1,2', 'tnode/TNodeSelect', 'el-icon-search');
 INSERT INTO `menu` VALUES (4, '004', '查询技术对应活动', '1', NULL, 'TNodeRel', '0,1,2', 'tnode/TNodeRelSelect', 'el-icon-search');
 INSERT INTO `menu` VALUES (5, '005', '查询防御反制活动', '1', NULL, 'EacNode', '0,1,2', 'eacnode/EacNodeSelect', 'el-icon-search');
@@ -141,7 +141,8 @@ INSERT INTO `menu` VALUES (9, '009', '计算主机价值', '1', NULL, 'HostValue
 INSERT INTO `menu` VALUES (10, '0010', '计算公式取值(攻击）', '1', NULL, 'TNodeQuaCom', '0,1,2', 'tnodequacom/TNodeQuaCom', 'el-icon-cpu');
 INSERT INTO `menu` VALUES (11, '0011', '计算公式取值(防御）', '1', NULL, 'EacNodeQuaCom', '0,1,2', 'eacnodequacom/EacNodeQuaCom', 'el-icon-cpu');
 INSERT INTO `menu` VALUES (12, '0012', '计算博弈均衡', '1', NULL, 'GameCom', '0,1,2', 'gamecom/GameCom', 'el-icon-cpu');
-INSERT INTO `menu` VALUES (13, '0013', '案例计算与防御者决策', '1', NULL, 'Example', '0,1,2', 'example/Example', 'el-icon-guide');
+INSERT INTO `menu` VALUES (13, '0013', '案例回报值计算', '1', NULL, 'Example', '0,1,2', 'example/Example', 'el-icon-guide');
+INSERT INTO `menu` VALUES (14, '0014', '案例防御方决策', '1', NULL, 'Decision', '0,1,2', 'decision/Decision', 'el-icon-guide');
 
 -- ----------------------------
 -- Table structure for t_node_qua
