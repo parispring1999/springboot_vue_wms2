@@ -19,7 +19,7 @@
         :visible.sync="centerDialogVisible"
         width="30%"
         center>
-      <el-form ref="form"  :model="form" label-width="200px">
+      <el-form ref="form"  :model="form" label-width="150px">
         <el-form-item label="(m1,a)策略分布" prop="m1a">
           <el-col :span="20">
             <el-input v-model="form.m1a"></el-input>
@@ -72,7 +72,7 @@
 
 <script>
 export default {
-  name: "Example",
+  name: "Decision",
   data() {
     return {
       tableData: [],
@@ -97,19 +97,44 @@ export default {
       this.centerDialogVisible = true
     },
     doCompute(){
-      // 将表单中的字符串转换为数字
-      const m1a = parseFloat(this.form.m1a);
-      const m2a = parseFloat(this.form.m2a);
-      const t1d = parseFloat(this.form.t1d);
-      const t2d = parseFloat(this.form.t2d);
-      const t1m1 = parseFloat(this.form.t1m1);
-      const t1m2 = parseFloat(this.form.t1m2);
-      const t2m1 = parseFloat(this.form.t2m1);
-      const t2m2 = parseFloat(this.form.t2m2);
 
-      // 进行计算和决策
+      // 将输入的字符串转换为数组
+      const m1aArr = this.form.m1a.split(/[, \n]+/).map(Number);
+      const m2aArr = this.form.m2a.split(/[, \n]+/).map(Number);
+      const t1dArr = this.form.t1d.split(/[, \n]+/).map(Number);
+      const t2dArr = this.form.t2d.split(/[, \n]+/).map(Number);
+      const t1m1Arr = this.form.t1m1.split(/[, \n]+/).map(Number);
+      const t1m2Arr = this.form.t1m2.split(/[, \n]+/).map(Number);
+      const t2m1Arr = this.form.t2m1.split(/[, \n]+/).map(Number);
+      const t2m2Arr = this.form.t2m2.split(/[, \n]+/).map(Number);
 
+      // 计算值1
+      const t1m1Sum = t1m1Arr.reduce((acc, val, index) => acc + val * m1aArr[index], 0);
+      const t1m2Sum = t1m2Arr.reduce((acc, val, index) => acc + val * m2aArr[index], 0);
+      const value1 = t1dArr.reduce((acc, val, index) => acc + val * (index === 0 ? t1m1Sum : t1m2Sum), 0);
 
+      // 计算值2
+      const t2m1Sum = t2m1Arr.reduce((acc, val, index) => acc + val * m1aArr[index], 0);
+      const t2m2Sum = t2m2Arr.reduce((acc, val, index) => acc + val * m2aArr[index], 0);
+      const value2 = t2dArr.reduce((acc, val, index) => acc + val * (index === 0 ? t2m1Sum : t2m2Sum), 0);
+
+      let selectedT;
+      let selectedM;
+      let selectedA;
+
+      if (value1 > value2) {
+        selectedT = "t1";
+        selectedM = t1dArr[0] > t1dArr[1] ? "m1" : "m2";
+        const selectedMAArr = selectedM === "m1" ? m1aArr : m2aArr;
+        selectedA = selectedMAArr.indexOf(Math.max(...selectedMAArr)) + 1;
+      } else {
+        selectedT = "t2";
+        selectedM = t2dArr[0] > t2dArr[1] ? "m1" : "m2";
+        const selectedMAArr = selectedM === "m1" ? m1aArr : m2aArr;
+        selectedA = selectedMAArr.indexOf(Math.max(...selectedMAArr)) + 1;
+      }
+
+      const out = `${selectedT},${selectedM},A${selectedA}`;
 
       // 将新数据添加到表格数据中
       this.tableData = [{ out: out }];
