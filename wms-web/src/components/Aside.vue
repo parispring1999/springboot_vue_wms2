@@ -2,7 +2,7 @@
   <el-menu
       background-color="#505c69"
       text-color="#fff"
-      active-text-color="#abccff"
+      active-text-color="#a2cfff"
       :class="['custom-aside', { 'el-menu--collapse': isCollapse }]"
       default-active="/Home"
       :collapse="isCollapse"
@@ -111,7 +111,7 @@ body {
   transform: translateY(-50%);
   height: 60%;
   width: 3px;
-  background-color: #abccff;
+  background-color: #a2cfff;
 }
 
 /* 图标和文字样式 */
