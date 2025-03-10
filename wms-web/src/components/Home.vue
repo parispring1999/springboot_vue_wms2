@@ -140,12 +140,45 @@ export default {
 }
 
 .welcome-text {
-  font-size: 1.5rem;
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem); /* 响应式字体大小 */
   color: #2d3a4b;
   font-weight: 600;
-  letter-spacing: 1px;
-  margin: 0;
-  line-height: 1.3;
+  letter-spacing: 0.5px;
+  margin: 0 0 1rem 0;
+  line-height: 1.4;
+  text-align: left;
+  position: relative;
+  padding-left: 1.5rem;
+  transform-origin: left center;
+  transition: all 0.3s ease;
+
+  /* 渐变文字效果 */
+  background: linear-gradient(15deg, #2d3a4b 0%, #4a5568 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* 文字装饰线 */
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 70%;
+    width: 3px;
+    background: linear-gradient(180deg, #409eff 0%, #6c5ce7 100%);
+    border-radius: 2px;
+  }
+
+  /* 微阴影增加立体感 */
+  text-shadow: 1px 1px 2px rgba(45, 58, 75, 0.1);
+
+  /* 悬停动效 */
+  &:hover {
+    transform: translateX(5px);
+    text-shadow: 2px 2px 4px rgba(45, 58, 75, 0.15);
+  }
 }
 
 /* 个人信息卡片 */
