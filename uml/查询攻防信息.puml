@@ -1,0 +1,94 @@
+@startuml
+allowmixing
+class TNodeQua {
+- {static} long serialVersionUID
+- String t
+- String rs
+- String sa
+- String lia
+- String pc
+- String pi
+- String pa
+- String av
+- String pr
+- String ui
+}
+
+class EacNodeQua {
+- {static} long serialVersionUID
+- String eac
+- String cp
+- String st
+- String nb
+- String ot
+- String bi
+- String rc
+- String ri
+- String ra
+- String ia
+- String vu
+}
+
+class TNodeQuaController {
+- TNodeQuaService tNodeQuaService
++ Result save(TNodeQua)
++ Result update(TNodeQua)
++ Result del(String)
++ Result listPage(QueryPageParam)
++ Result list()
+}
+class EacNodeQuaController {
+- EacNodeQuaService eacNodeQuaService
++ Result save(EacNodeQua)
++ Result update(EacNodeQua)
++ Result del(String)
++ Result listPage(QueryPageParam)
++ Result list()
+}
+interface EacNodeQuaMapper {
+
+}
+interface TNodeQuaMapper {
+
+}
+interface TNodeQuaService {
+
+}
+interface EacNodeQuaService {
+
+}
+class TNodeQuaServiceImpl implements TNodeQuaService{
+- TNodeQuaMapper tNodeQuaMapper
++ IPage pageCC(IPage<TNodeQua>,Wrapper)
+}
+class EacNodeQuaServiceImpl implements EacNodeQuaService{
+- EacNodeQuaMapper eacNodeQuaMapper
++ IPage pageCC(IPage<EacNodeQua>,String,Wrapper)
+}
+class WmsApplication {
++ {static} void main(String[])
+}
+file TNodeQuaManage
+file EacNodeQuaManage
+node router
+node store
+node main
+file App
+TNodeQuaServiceImpl<|--TNodeQuaController
+EacNodeQuaServiceImpl<|--EacNodeQuaController
+TNodeQuaServiceImpl---|>TNodeQuaMapper
+EacNodeQuaServiceImpl---|>EacNodeQuaMapper
+TNodeQuaMapper-->TNodeQua
+EacNodeQuaMapper-->EacNodeQua
+TNodeQuaController<--WmsApplication
+EacNodeQuaController<--WmsApplication
+TNodeQuaController <-- TNodeQuaManage
+EacNodeQuaController <-- EacNodeQuaManage
+TNodeQuaManage <- router
+EacNodeQuaManage <- router
+store <-> router
+EacNodeQuaManage <--> store
+TNodeQuaManage <--> store
+router <- App
+App <- main
+@enduml

@@ -1,0 +1,122 @@
+@startuml
+allowmixing
+class TNode {
+~ Long id0
+- String id
+- String name
+- String des
+- List<DyRelationship> dyRelationship
+}
+class TANode {
+~ Long id0
+- String id
+- String name
+- String des
+- List<JuRelationship> juRelationship
+}
+class EacNode {
+~ Long id0
+- String id
+- String name
+- String des
+}
+class DyRelationship {
+~ Long id0
+- EacNode eacNode
+}
+class JuRelationship {
+~ Long id0
+- TNode tNode
+}
+class TANodeController {
+- TANodeService tANodeService
++ List<TANode> getAllTANode()
++ TANode getTANode(String)
++ TANode addTANode(String)
++ void deleteTANode(String)
+}
+class TNodeController {
+- TNodeService tNodeService
++ List<TNode> getAllTNode()
++ TNode getTNode(String)
++ TNode addTNode(String)
++ void deleteTNode(String)
+}
+class EacNodeController {
+- EacNodeService eacNodeService
++ List<EacNode> getAllEacNode()
++ EacNode getEacNode(String)
++ EacNode addEacNode(String)
++ void deleteEacNode(String)
+}
+interface TNodeRepository {
+~ TNode findTNodeById(String)
+}
+interface TANodeRepository {
+~ TANode findTANodeById(String)
+}
+interface EacNodeRepository {
+~ EacNode findEacNodeById(String)
+}
+class TNodeService implements TNodeRepository{
+- TNodeRepository tNodeRepository
++ List<TNode> getAllTNode()
++ TNode getTNodeById(String)
++ TNode addTNode(String)
++ void deleteTNode(String)
+}
+class TANodeService implements TANodeRepository{
+- TANodeRepository tANodeRepository
++ List<TANode> getAllTANode()
++ TANode getTANodeById(String)
++ TANode addTANode(String)
++ void deleteTANode(String)
+}
+class EacNodeService implements EacNodeRepository{
+- EacNodeRepository eacNodeRepository
++ List<EacNode> getAllEacNode()
++ EacNode getEacNodeById(String)
++ EacNode addEacNode(String)
++ void deleteEacNode(String)
+}
+TNodeService<|--TNodeController
+TNode<--TNodeService
+DyRelationship<|--TNode
+DyRelationship--|>EacNode
+EacNodeService<|--EacNodeController
+EacNode<---EacNodeService
+TANodeService<|--TANodeController
+TANode<---TANodeService
+JuRelationship<|--TANode
+JuRelationship--|>TNode
+
+class WmsApplication {
++ {static} void main(String[])
+}
+file TANodeRelSelect
+file EacNodeSelect
+file TNodeRelSelect
+file TNodeSelect
+node router
+node store
+node main
+file App
+TNodeController<--WmsApplication
+TANodeController<--WmsApplication
+EacNodeController<--WmsApplication
+TANodeRelSelect <--- router
+EacNodeSelect <--- router
+TNodeSelect <--- router
+TNodeRelSelect <--- router
+store <-> router
+EacNodeSelect <-> store
+TANodeRelSelect <--> store
+TNodeRelSelect <--> store
+TNodeSelect <--> store
+router <- App
+App <- main
+TANodeController<--TANodeRelSelect
+TNodeController<--TNodeRelSelect
+TNodeController<--TNodeSelect
+EacNodeController<--EacNodeSelect
+@enduml

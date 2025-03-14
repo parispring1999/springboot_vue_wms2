@@ -1,0 +1,93 @@
+@startuml
+allowmixing
+class UserController {
+- UserService userService
+- MenuService menuService
++ List<User> list()
++ Result findByNo(String)
++ Result save(User)
++ Result update(User)
++ Result del(String)
++ Result login(User)
++ boolean mod(User)
++ boolean saveOrMod(User)
++ boolean delete(Integer)
++ Result listP(User)
++ Result listPageC1(QueryPageParam)
+}
+
+class User {
+- {static} long serialVersionUID
+- Integer id
+- String no
+- String name
+- String password
+- Integer age
+- Integer sex
+- String phone
+- Integer roleId
+- String isvalid
+}
+
+class Menu {
+- {static} long serialVersionUID
+- Integer id
+- String menucode
+- String menuname
+- String menulevel
+- String menuparentcode
+- String menuclick
+- String menuright
+- String menucomponent
+- String menuicon
+}
+
+interface UserMapper {
+~ IPage pageCC(IPage<User>,Wrapper)
+}
+
+interface MenuMapper {
+}
+
+interface UserService {
+~ IPage pageCC(IPage<User>,Wrapper)
+}
+
+interface MenuService {
+}
+
+class MenuServiceImpl implements MenuService{
+}
+
+class UserServiceImpl implements UserService{
+- UserMapper userMapper
++ IPage pageCC(IPage<User>,Wrapper)
+}
+
+file Login
+file UserManage
+node router
+node store
+node main
+file App
+class WmsApplication {
++ {static} void main(String[])
+}
+
+UserServiceImpl <|-- UserController
+MenuServiceImpl <|-- UserController
+UserServiceImpl --|> UserMapper
+MenuServiceImpl ---|> MenuMapper
+Menu <-- MenuMapper
+User <-- UserMapper
+UserController <-- Login
+UserController <-- UserManage
+UserManage <-- router
+Login <- router
+store <-> router
+UserManage <-> store
+Login <-> store
+UserController <-- WmsApplication
+router <- App
+App <- main
+@enduml

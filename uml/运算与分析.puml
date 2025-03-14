@@ -1,0 +1,44 @@
+@startuml
+allowmixing
+class PyConController {
++ String runGame(QueryParam)
++ String hostValue(QueryParam)
+}
+component "game_2" as gamepy
+component entropy_weight_method
+file EacNodeQuaCom
+file TNodeQuaCom
+file HostValue
+file GameCom
+file Example
+file Decision
+file "game_2" as gameefg
+gamepy<--PyConController
+entropy_weight_method<--PyConController
+gamepy<->gameefg
+PyConController<--GameCom
+PyConController<--HostValue
+class WmsApplication {
++ {static} void main(String[])
+}
+node router
+node store
+node main
+file App
+PyConController<-WmsApplication
+router -> TNodeQuaCom
+EacNodeQuaCom <- router
+Example <-- router
+Decision <-- router
+GameCom <-- router
+HostValue <-- router
+store <--> router
+EacNodeQuaCom <--> store
+store <--> TNodeQuaCom
+Example <-> store
+Decision <-> store
+GameCom <--> store
+HostValue <--> store
+router <- App
+App <- main
+@enduml
