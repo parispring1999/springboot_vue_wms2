@@ -60,6 +60,21 @@
             <el-input v-model="form.t2m2"></el-input>
           </el-col>
         </el-form-item>
+        <el-form-item label="t1是" prop="t1">
+          <el-col :span="20">
+            <el-input v-model="form.n_t1"></el-input>
+          </el-col>
+        </el-form-item>
+        <el-form-item label="t2是" prop="t2">
+          <el-col :span="20">
+            <el-input v-model="form.n_t2"></el-input>
+          </el-col>
+        </el-form-item>
+        <el-form-item label="攻击者行动有什么" prop="A">
+          <el-col :span="20">
+            <el-input v-model="form.n_a"></el-input>
+          </el-col>
+        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
     <el-button @click="centerDialogVisible = false">取 消</el-button>
@@ -86,6 +101,9 @@ export default {
         t1m2:"",
         t2m1:"",
         t2m2:"",
+        n_t1:"",
+        n_t2:"",
+        n_a:"",
       },
     }
   },
@@ -107,6 +125,10 @@ export default {
       const t1m2Arr = this.form.t1m2.split(/[, \n]+/).map(Number);
       const t2m1Arr = this.form.t2m1.split(/[, \n]+/).map(Number);
       const t2m2Arr = this.form.t2m2.split(/[, \n]+/).map(Number);
+
+      const n_t1Arr = this.form.n_t1.split(/[, \n]+/);
+      const n_t2Arr = this.form.n_t2.split(/[, \n]+/);
+      const n_aArr = this.form.n_a.split(/[, \n]+/);
 
       // 计算值1
       const t1m1Sum = t1m1Arr.reduce((acc, val, index) => acc + val * m1aArr[index], 0);
@@ -134,7 +156,12 @@ export default {
         selectedA = selectedMAArr.indexOf(Math.max(...selectedMAArr)) + 1;
       }
 
-      const out = `${selectedT},${selectedM},A${selectedA}`;
+      const defender = selectedT === "t1" ? n_t1Arr[0] : n_t2Arr[0];
+      const release = selectedM === "m1" ? n_t1Arr[0] : n_t2Arr[0];
+      const attacker = n_aArr[selectedA - 1];
+
+      //const out = `${selectedT},${selectedM},A${selectedA}`;
+      const out = `防御者使用(${defender})，释放(${release})，攻击者使用(${attacker})`;
 
       // 将新数据添加到表格数据中
       this.tableData = [{ out: out }];
