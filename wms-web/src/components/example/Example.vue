@@ -142,6 +142,7 @@
     <el-button @click="centerDialogVisible = false">取 消</el-button>
     <el-button type="primary" @click="sure">确 定</el-button>
         <el-button @click="resetForm">重 置</el-button>
+        <el-button @click="exain">案例数据</el-button>
   </span>
     </el-dialog>
   </div>
@@ -177,6 +178,28 @@ export default {
     }
   },
   methods:{
+    exain(){
+      this.form = {
+        ag1:"8.97",
+        ka1:"0.64",
+        ac1:"20",
+        kd11:"0.56",
+        dh1:"26.92",
+        dc1:"18",
+        kd21:"0.8",
+        af1:"22.7",
+        dw1:"7",
+        ag2:"5.38",
+        ka2:"0.48",
+        ac2:"27.5",
+        kd12:"0.42",
+        dh2:"0",
+        dc2:"12",
+        kd22:"0.8",
+        af2:"45",
+        dw2:"5",
+      };
+    },
     resetForm() {
       this.$refs.form.resetFields();
     },

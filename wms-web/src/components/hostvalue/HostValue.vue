@@ -42,10 +42,11 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-    <el-button @click="centerDialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="sure">确 定</el-button>
+        <el-button @click="centerDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="sure">确 定</el-button>
         <el-button @click="resetForm">重 置</el-button>
-  </span>
+        <el-button @click="exain">案例数据</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
@@ -67,6 +68,14 @@ export default {
     }
   },
   methods:{
+    exain() {
+      this.form = {
+        hostType: "0.8 0.8 0.6 1 0.8 0.8",
+        systemType:"0.8 0.8 1 0.8 0.8 0.8",
+        connectionNum:"0.9 1 0.8 0.8 0.8 0.8 0.9",
+        businessType:"1 0.6 0.8 0.9 0.9 0.6",
+      };
+    },
     resetForm() {
       this.$refs.form.resetFields();
     },

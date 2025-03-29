@@ -80,6 +80,7 @@
     <el-button @click="centerDialogVisible = false">取 消</el-button>
     <el-button type="primary" @click="sure">确 定</el-button>
         <el-button @click="resetForm">重 置</el-button>
+        <el-button @click="exain">案例数据</el-button>
   </span>
     </el-dialog>
   </div>
@@ -108,6 +109,21 @@ export default {
     }
   },
   methods:{
+    exain(){
+      this.form = {
+        m1a:"0 1 0 0",
+        m2a:"0 0.7525 0.2475 0",
+        t1d:"1 0",
+        t2d:"1 0",
+        t1m1:"-7.95 -17 9.21 -0.65",
+        t1m2:"-14.95 -24 2.21 -7.65",
+        t2m1:"13.98 3.01 -19.26 -22.59",
+        t2m2:"18.98 8.01 -14.26 -17.59",
+        n_t1:"EAC0018",
+        n_t2:"EAC0005",
+        n_a:"T1003 T1119 T1528 T1134",
+      };
+    },
     resetForm() {
       this.$refs.form.resetFields();
     },
@@ -161,8 +177,8 @@ export default {
       const attacker = n_aArr[selectedA - 1];
 
       //const out = `${selectedT},${selectedM},A${selectedA}`;
-      const out = `防御者使用(${defender})，释放(${release})，攻击者使用(${attacker})`;
-
+      const out = `防御者使用${defender}，释放${release}，攻击者使用${attacker}`;
+      //const out = `防御者使用EAC0005，释放EAC0018，攻击者使用T1119`;
       // 将新数据添加到表格数据中
       this.tableData = [{ out: out }];
       this.$message({
