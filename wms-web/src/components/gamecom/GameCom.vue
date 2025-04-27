@@ -72,8 +72,8 @@ export default {
       this.form = {
         blueNum:"2",
         redNum:"4",
-        chance:"642 1000 358 1000",
-        outcome:"-31.49 -7.95 -26.15 -17 -60.54 9.21 -59.84 -0.65 -31.49 -14.95 -26.15 -24 -60.54 2.21 -59.84 -7.65 -59.26 13.98 -51.52 3.01 -24.92 -19.26 -26.32 -22.59 -59.26 18.98 -51.52 8.01 -24.92 -14.26 -26.32 -17.59",
+        chance:"642,1000,358,1000",
+        outcome:"-31.49,-7.95,-26.15,-17,-60.54,9.21,-59.84,-0.65,-31.49,-14.95,-26.15,-24,-60.54,2.21,-59.84,-7.65,-59.26,13.98,-51.52,3.01,-24.92,-19.26,-26.32,-22.59,-59.26,18.98,-51.52,8.01,-24.92,-14.26,-26.32,-17.59",
       };
     },
     resetForm() {
@@ -83,6 +83,7 @@ export default {
       this.centerDialogVisible = true
     },
     doCompute(){
+      this.form.inputData="";
       this.form.inputData += this.form.blueNum + ",";
       this.form.inputData += this.form.redNum + ",";
       this.form.inputData += this.form.chance + ",";
