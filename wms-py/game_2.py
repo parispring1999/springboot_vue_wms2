@@ -49,5 +49,5 @@ g.to_efg(game_file_path)
 # print(g.write(format='native'))
 
 # qre=gbt.nash.logit_principal_branch(game=g)
-result = gbt.nash.lcp_solve(game=g, use_strategic=False)
+result = gbt.nash.logit_solve(game=g)
 print(result.equilibria)

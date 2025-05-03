@@ -2,7 +2,7 @@ import pygambit as gbt
 import os
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-game_file_path = os.path.join(script_dir, "gambit", "game_1.gbt")
+game_file_path = os.path.join(script_dir, "gambit", "game_2.efg")
 
 g = gbt.Game.read_game(game_file_path)
 # print(g.write(format='native'))

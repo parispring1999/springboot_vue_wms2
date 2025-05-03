@@ -70,10 +70,10 @@ export default {
   methods:{
     exain() {
       this.form = {
-        hostType: "0.8 0.8 0.6 1 0.8 0.8",
-        systemType:"0.8 0.8 1 0.8 0.8 0.8",
-        connectionNum:"0.9 1 0.8 0.8 0.8 0.8 0.9",
-        businessType:"1 0.6 0.8 0.9 0.9 0.6",
+        hostType: "0.8 0.6 0.6 1 0.8 0.6",
+        systemType:"0.8 0.6 1 0.8 0.8 0.6",
+        connectionNum:"0.8 1 0.8 0.8 0.8 1",
+        businessType:"1 0.6 0.8 1 0.9 0.6",
       };
     },
     resetForm() {
